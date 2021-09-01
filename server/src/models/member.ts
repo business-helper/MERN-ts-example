@@ -29,6 +29,12 @@ memberSchema.statics.build = (attr: IMember) => {
   return new Member(attr);
 }
 
+memberSchema.method('toJSON', function () {
+  const { __v, _id, ...object } = this.toObject();
+  object.id = _id;
+  return object;
+});
+
 const Member = mongoose.model<MemberDoc, MemberModelInterface>('Member', memberSchema);
 
 export default Member;
