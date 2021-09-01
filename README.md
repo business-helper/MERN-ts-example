@@ -12,6 +12,7 @@ This is an application with simple submit form.
 ### Front-End
 - React.js(CRA)
 - Material UI
+- Typescript
 
 ## How to Run on Local Machine
 ### Back-End
