@@ -61,12 +61,25 @@ export default function MemberForm({ addMember }: Props) {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (name.error || country.error) return;
+    
+    // validation
+    let valid = true;
+    if (!name.value) {
+      valid = false;
+      setName({ ...name, error: 'Name is required!' });
+    }
+    if (!country.value) {
+      valid = false;
+      setCountry({ ...country, error: 'Country is required!' });
+    }
+    if (!valid || country.error || name.error) return false;
+    
     const member: IMember = {
       name: name.value,
       country: country.value,
     };
-    setName({ ...name, value: '' });
+    setName({ value: '', error: '' });
+    setCountry({ value: '', error: '' });
     return addMember(member);
   };
 
