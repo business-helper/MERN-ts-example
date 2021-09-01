@@ -4,7 +4,6 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "postinstall": "rm ./node_modules/mongoose/index.d.ts",
     "lint": "tslint -c tslint.json -p tsconfig.json --fix",
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "tsc",
