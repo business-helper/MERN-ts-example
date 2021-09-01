@@ -3,7 +3,7 @@ import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { Button, FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { ICountry } from '../../interfaces';
+import { ICountry, IMember } from '../../interfaces';
 import { getCountryList } from '../../api';
 
 const useStyles = makeStyles((theme) => ({
@@ -27,7 +27,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MemberForm() {
+type Props = {
+  addMember:  (member: IMember) => void,
+}
+
+export default function MemberForm({ addMember }: Props) {
   const classes = useStyles();
   const [countryList, setCountryList] = React.useState<ICountry[]>([]);
   
@@ -59,7 +63,13 @@ export default function MemberForm() {
   };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    
+    if (name.error || country.error) return;
+    const member: IMember = {
+      name: name.value,
+      country: country.value,
+    };
+    setName({ ...name, value: '' });
+    return addMember(member);
   }
 
 
