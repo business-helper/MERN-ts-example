@@ -3,10 +3,10 @@ import { Container, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import MemberForm from '../components/MemberForm';
-import MemberTable from '../components/DataTable';
+import MemberTable from '../components/MemberTable';
 
 import { IMember } from '../interfaces';
-import { addMember, getMembers } from '../api';
+import { addMember, deleteMember, getMembers } from '../api';
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -22,7 +22,6 @@ export function HomePage({}) {
   }, []);
   const loadMembers = () => {
     getMembers().then(members => {
-      console.log('[Members]', members);
       setMemberList(members);
     })
     .catch(e => setMemberList([]));
@@ -30,6 +29,14 @@ export function HomePage({}) {
   const handleAddMember = (data: IMember) => {
     return addMember(data)
       .then(member => loadMembers())
+  }
+  const handleDeleteMember = (id: string) => {
+    return deleteMember(id)
+      .then(deleted => {
+        if (deleted) {
+          return loadMembers();
+        }
+      });
   }
   return (
     <Container maxWidth="sm">
@@ -40,6 +47,7 @@ export function HomePage({}) {
         addMember={handleAddMember} />
       <MemberTable 
         rows={memberList}
+        deleteMember={handleDeleteMember}
         />
     </Container>
   );

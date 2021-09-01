@@ -38,10 +38,8 @@ export default function MemberForm({ addMember }: Props) {
   const [name, setName] = React.useState({ value: '', error: '' });
   const [country, setCountry] = React.useState({ value: '', error: '' });
 
-  const [age, setAge] = React.useState('');
   React.useEffect(() => {
     getCountryList().then(countries => {
-      console.log('[Countries]', countries);
       setCountryList(countries);
       setCountry({ value: countries[0].name, error: '' });
     })
@@ -53,14 +51,15 @@ export default function MemberForm({ addMember }: Props) {
       value: event.currentTarget.value,
       error: event.currentTarget.value ? '' : 'Name is required!',
     });
-  }
+  };
+
   const handleChange = (event: any) => {
-    // setAge(event.target.value);
     setCountry({
       value: event.target.value,
       error: ''
     })
   };
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (name.error || country.error) return;
@@ -70,7 +69,7 @@ export default function MemberForm({ addMember }: Props) {
     };
     setName({ ...name, value: '' });
     return addMember(member);
-  }
+  };
 
 
   return (

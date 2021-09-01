@@ -41,3 +41,16 @@ export const getMembers = () => {
       throw new Error(data.error);
     });
 }
+
+export const deleteMember = (id: string) => {
+  type DeleteMemberResponse = {
+    error: string,
+  };
+  return axios.delete<DeleteMemberResponse>(`${process.env.REACT_APP_API_URL}/members/${id}`)
+    .then(({ status, data }) => {
+      if (status === 204) {
+        return true;
+      }
+      throw new Error(data.error);
+    });
+}
