@@ -10,7 +10,7 @@ interface MemberDoc extends mongoose.Document {
   country: string;
 }
 
-interface memberModelInterface extends mongoose.Model<MemberDoc> {
+interface MemberModelInterface extends mongoose.Model<MemberDoc> {
   build(attr: IMember): MemberDoc;
 }
 
@@ -29,6 +29,6 @@ memberSchema.statics.build = (attr: IMember) => {
   return new Member(attr);
 }
 
-const Member = mongoose.model<MemberDoc, memberModelInterface>('Member', memberSchema);
+const Member = mongoose.model<MemberDoc, MemberModelInterface>('Member', memberSchema);
 
 export default Member;
