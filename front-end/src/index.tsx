@@ -9,10 +9,10 @@ import reportWebVitals from './reportWebVitals';
 import theme from './theme';
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    {/* <CssBaseline /> */}
-    <App />
-  </ThemeProvider>,
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+    </ThemeProvider>,
   document.getElementById('root')
 );
 

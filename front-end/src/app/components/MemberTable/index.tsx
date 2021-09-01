@@ -29,12 +29,12 @@ export default function DataTable({ rows, deleteMember }: Props) {
     {
       field: 'country',
       headerName: 'Country',
-      width: 300,
+      width: 250,
     },
     {
       field: 'id',
       headerName: 'Actions',
-      width: 100,
+      width: 150,
       renderCell: (params) => <Button
         variant='outlined'
         size='small'
